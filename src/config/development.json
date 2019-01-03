@@ -2,7 +2,7 @@
   "name": "task manager app service",
   "locales": "en-US",
   "swagger": {
-    "host": "192.168.31.240",
+    "host": "192.168.43.123",
     "schemes": [
       "http"
     ]
@@ -11,25 +11,19 @@
     "port": 8080
   },
   "third-party": {},
-  "database": {
-    "postgres": [
-       {
-        "db": "task-manager",
-        "host": "localhost",
-        "port": 5432,
-        "user": "postgres",
-        "password": "postgres",
-        "default": true
-      },
-      {
-        "db": "test-db",
-        "host": "localhost",
-        "port": 5432,
-        "user": "postgres",
-        "password": "postgres"
+    "database": {
+      "postgres": {
+        "test-database": {
+          "host": "localhost",
+          "db": "test-database",
+          "port": 5432,
+          "credentials": {
+            "username": "postgres",
+            "password": "postgres"
+          }
+        }
       }
-    ]
-  },
+    },
   "jwtOptions": {
     "expiresIn": "180d"
   },

@@ -3,11 +3,11 @@ import url from 'url'
 const routes = {}
 
 export const add = (path) => {
-  path = path.toLowerCase()
-  if (!path.startsWith('/')) {
-    path = `/${path}`
+  let newPath = path.toLowerCase()
+  if (!newPath.startsWith('/')) {
+    newPath = `/${newPath}`
   }
-  routes[path] = true
+  routes[newPath] = true
 }
 
 export const has = (path) => {

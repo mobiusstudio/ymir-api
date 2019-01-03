@@ -7,7 +7,8 @@ import cors from 'cors'
 import swaggerTools from 'swagger-tools'
 import log4js from 'log4js'
 import { snakeCase } from 'lodash'
-import models, { configure } from 'ymir-models'
+
+import models, { configure } from '../../ymir-models'
 
 import config from './config'
 import errors from './errors'
@@ -15,6 +16,9 @@ import { apiKeyAuth } from './authorization'
 
 global.models = models
 global.config = config
+
+global.__DEV__ = true
+global.__TEST__ = false
 
 log4js.configure({
   appenders: {
@@ -48,6 +52,7 @@ const server = async () => {
 
   // create/update db version
   try {
+    console.log(config.database.postgres)
     const manager = await configure(config)
     await manager.update()
     logger.info(`database version: ${manager.version}`)
