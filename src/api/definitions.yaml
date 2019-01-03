@@ -1,0 +1,16 @@
+Task:
+  $ref: "./task/base.yaml#/definitions/Task"
+ApiResponse:
+  type: "object"
+  properties:
+    code:
+      type: "integer"
+      format: "int32"
+    type:
+      type: "string"
+    message:
+      type: "string"
+  example:
+    code: 0
+    type: "type"
+    message: "message"
