@@ -17,7 +17,9 @@ import { apiKeyAuth } from './authorization'
 global.models = models
 global.config = config
 
+// eslint-disable-next-line no-underscore-dangle
 global.__DEV__ = true
+// eslint-disable-next-line no-underscore-dangle
 global.__TEST__ = false
 
 log4js.configure({
@@ -52,7 +54,6 @@ const server = async () => {
 
   // create/update db version
   try {
-    console.log(config.database.postgres)
     const manager = await configure(config)
     await manager.update()
     logger.info(`database version: ${manager.version}`)
