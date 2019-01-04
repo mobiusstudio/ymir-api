@@ -49,7 +49,10 @@ export const updateTask = async (req, res) => {
     const id = req.swagger.params.taskId.value
     const data = req.swagger.params.body.value
     logger.trace('Update task', data)
-    const result = await new Task(data).update(data, id)
+    const result = await task.update({
+      data,
+      pkeyValue: id,
+    })
     return res.json(result)
   } catch (error) {
     throw error
