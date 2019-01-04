@@ -1,0 +1,58 @@
+paths:
+  /task/batch:
+    x-swagger-router-controller: "Task"
+    post:
+      tags:
+      - "task"
+      summary: "Batch add new tasks"
+      description: ""
+      operationId: "batchAddTask"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "dataArray"
+        description: "Task object array that needs to be added"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "./base.yaml#/definitions/Task"
+      responses:
+        405:
+          description: "Invalid input"
+    patch:
+      tags:
+      - "task"
+      summary: "Batch update new tasks"
+      description: ""
+      operationId: "batchUpdateTask"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "paramsArray"
+        description: "Task params array that needs to be updated"
+        required: true
+        schema:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              data:
+                $ref: "./base.yaml#/definitions/Task"
+              pkeyValue:
+                type: "integer"
+                format: "base64"
+      responses:
+        405:
+          description: "Invalid input"
+    

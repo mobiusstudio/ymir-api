@@ -2,3 +2,5 @@
   $ref: "./task/base.yaml#/paths/~1task"
 /task/{taskId}:
   $ref: "./task/base.yaml#/paths/~1task~1{taskId}"
+/task/batch:
+  $ref: "./task/batch.yaml#/paths/~1task~1batch"

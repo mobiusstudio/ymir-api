@@ -18,7 +18,7 @@ paths:
       - "application/xml"
       parameters:
       - in: "body"
-        name: "body"
+        name: "data"
         description: "Task object that needs to be added"
         required: true
         schema:
@@ -113,7 +113,7 @@ paths:
         required: true
         type: "integer"
         format: "int64"
-      - name: "body"
+      - name: "data"
         in: "body"
         description: "Task object that needs to be updated"
         required: true

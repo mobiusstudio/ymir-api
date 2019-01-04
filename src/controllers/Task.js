@@ -5,7 +5,7 @@ const task = new Task()
 
 export const addTask = async (req, res) => {
   try {
-    const data = req.swagger.params.body.value
+    const data = req.swagger.params.data.value
     logger.trace('Add new task', data)
     const object = await task.add(data)
     return res.json(object)
@@ -47,7 +47,7 @@ export const getTask = async (req, res) => {
 export const updateTask = async (req, res) => {
   try {
     const id = req.swagger.params.taskId.value
-    const data = req.swagger.params.body.value
+    const data = req.swagger.params.data.value
     logger.trace('Update task', data)
     const result = await task.update({
       data,
@@ -64,6 +64,30 @@ export const deleteTask = async (req, res) => {
     const id = req.swagger.params.taskId.value
     logger.trace('Delete task', id)
     const result = await task.delete(id)
+    return res.json(result)
+  } catch (error) {
+    throw error
+  }
+}
+
+// batch functions
+
+export const batchAddTask = async (req, res) => {
+  try {
+    const dataArray = req.swagger.params.dataArray.value
+    logger.trace('Batch add task', dataArray)
+    const result = await task.batchAdd(dataArray)
+    return res.json(result)
+  } catch (error) {
+    throw error
+  }
+}
+
+export const batchUpdateTask = async (req, res) => {
+  try {
+    const paramsArray = req.swagger.params.paramsArray.value
+    logger.trace('Batch update task', paramsArray)
+    const result = await task.batchUpdate(paramsArray)
     return res.json(result)
   } catch (error) {
     throw error
