@@ -1,5 +1,38 @@
 Task:
   $ref: "./task/base.yaml#/definitions/Task"
+Paging:
+  type: "object"
+  properties:
+    filters:
+      $ref: "#/Filters"
+    orderBy:
+      $ref: "#/OrderBy"
+Filters:
+  type: "array"
+  items:
+    $ref: "#/Filter"
+Filter:
+  type: "object"
+  properties:
+    key:
+      type: "string"
+    symbol:
+      type: "string"
+    value:
+      type:
+      - "string"
+      - "number"
+OrderBy:
+  type: "array"
+  items:
+    $ref: "#/OrderByItem"
+OrderByItem:
+  type: "object"
+  properties:
+    by:
+      type: "string"
+    sort:
+      type: "string"
 ApiResponse:
   type: "object"
   properties:

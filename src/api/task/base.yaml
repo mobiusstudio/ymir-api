@@ -48,12 +48,10 @@ paths:
       - name: "next"
         in: "query"
         type: "integer"
-      - name: "filters"
-        in: "query"
-        type: "string"
-      - name: "orderBy"
-        in: "query"
-        type: "string"
+      - name: "paging"
+        in: "body"
+        schema: 
+          $ref: "../base.yaml#/definitions/Paging"
       responses:
         200:
           description: "successful operation"
