@@ -35,7 +35,7 @@ export const getTaskList = async (req, res) => {
 
 export const getTask = async (req, res) => {
   try {
-    const id = req.swagger.params.taskId.value
+    const id = req.swagger.params.id.value
     logger.trace('Get task', id)
     const object = await task.from().where`id = ${id}`.select().do()
     return res.json(object)
@@ -46,7 +46,7 @@ export const getTask = async (req, res) => {
 
 export const updateTask = async (req, res) => {
   try {
-    const id = req.swagger.params.taskId.value
+    const id = req.swagger.params.id.value
     const data = req.swagger.params.data.value
     logger.trace('Update task', data)
     const result = await task.update({
@@ -61,7 +61,7 @@ export const updateTask = async (req, res) => {
 
 export const deleteTask = async (req, res) => {
   try {
-    const id = req.swagger.params.taskId.value
+    const id = req.swagger.params.id.value
     logger.trace('Delete task', id)
     const result = await task.delete(id)
     return res.json(result)

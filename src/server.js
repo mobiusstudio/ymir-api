@@ -1,6 +1,6 @@
-import fs from 'fs'
+// import fs from 'fs'
 import path from 'path'
-import jsyaml from 'js-yaml'
+// import jsyaml from 'js-yaml'
 import express from 'express'
 import fileUpload from 'express-fileupload'
 import cors from 'cors'
@@ -10,6 +10,7 @@ import { snakeCase } from 'lodash'
 
 import models, { configure } from '../../ymir-models'
 
+import swagger from './swagger'
 import config from './config'
 import errors from './errors'
 import { apiKeyAuth } from './authorization'
@@ -47,8 +48,8 @@ const server = async () => {
   if (instance) port += instance
 
   // loading swagger config
-  const spec = fs.readFileSync(path.join(__dirname, './swagger/swagger.yaml'), 'utf8')
-  const swagger = jsyaml.safeLoad(spec)
+  // const spec = fs.readFileSync(path.join(__dirname, './swagger/swagger.yaml'), 'utf8')
+  // const swagger = jsyaml.safeLoad(spec)
   swagger.host = config.swagger.host
   swagger.schemes = config.swagger.schemes
 

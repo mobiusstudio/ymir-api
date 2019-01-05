@@ -1,8 +1,8 @@
 import { assemblePath } from '../utils'
-import test from './test'
+import apiPaths from '../../api/path'
 
 const routes = {
-  test,
+  ...apiPaths,
 }
 
 const basePath = ''

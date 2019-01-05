@@ -14,7 +14,7 @@ const type2formats = {
 function buildName2NameMap(arr) {
   return arr.reduce((map, name) => {
     let keyName = ''
-    const newMap = {}
+    const newMap = map
     for (let i = 0; i < name.length; i += 1) {
       if (name[i] === '-') {
         i += 1
@@ -54,10 +54,12 @@ export const contentType = {
   formData: 'multipart/form-data',
 }
 
-export const xSwagger = {
-  controller: 'x-swagger-router-controller',
-  operationId: 'operationId',
+export const id = {
+  required: true,
+  type: type.integer,
+  format: format.integer.int64,
 }
+
 
 export const pagesize = {
   in: 'query',
@@ -87,8 +89,17 @@ export const next = {
   required: false,
 }
 
-export const filter = {
-  name: 'filter',
+export const paging = {
+  in: 'body',
+  name: 'paging',
+  description: '分页筛选/排序条件',
+  schema: {
+    $ref: $ref('PagingData'),
+  },
+  required: false,
+}
+
+const filter = {
   type: type.object,
   description: '筛选参数，{ key, symbol, value }',
   properties: {
@@ -96,40 +107,31 @@ export const filter = {
     symbol: { type: type.string },
     value: { type: [type.string, type.number] },
   },
-  required: false,
 }
 
-export const filters = {
-  name: 'filters',
+const filters = {
   type: type.array,
   description: '筛选参数数组',
   items: filter,
-  required: false,
 }
 
-export const orderByItem = {
-  name: 'orderByItem',
+const orderByItem = {
   type: type.object,
   description: '排序参数, { by, sort, ... }',
   properties: {
     by: { type: type.string },
     sort: { type: type.string },
   },
-  required: false,
 }
 
 
-export const orderBy = {
-  name: 'orderBy',
+const orderBy = {
   type: type.array,
   items: orderByItem,
   description: '排序参数数组',
-  required: false,
 }
 
-export const paging = {
-  name: 'paging',
-  in: 'body',
+export const PagingData = {
   type: type.object,
   properties: {
     filters,
