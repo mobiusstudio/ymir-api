@@ -47,7 +47,7 @@ const server = async () => {
   if (instance) port += instance
 
   // loading swagger config
-  const spec = fs.readFileSync(path.join(__dirname, './swagger.yaml'), 'utf8')
+  const spec = fs.readFileSync(path.join(__dirname, './swagger/swagger.yaml'), 'utf8')
   const swagger = jsyaml.safeLoad(spec)
   swagger.host = config.swagger.host
   swagger.schemes = config.swagger.schemes
