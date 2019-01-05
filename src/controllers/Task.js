@@ -93,3 +93,10 @@ export const batchUpdateTask = async (req, res) => {
     throw error
   }
 }
+
+export const batchDeleteTask = async (req, res) => {
+  const idArray = req.swagger.params.idArray.value
+  logger.trace('Batch delete task', idArray)
+  const result = await task.batchDelete(idArray)
+  return res.json(result)
+}

@@ -55,4 +55,27 @@ paths:
       responses:
         405:
           description: "Invalid input"
-    
+    delete:
+      tags:
+      - "task"
+      summary: "Batch deletes tasks"
+      description: ""
+      operationId: "batchDeleteTask"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "idArray"
+        description: "Task id array that needs to be deleted"
+        required: true
+        schema:
+          type: "array"
+          items:
+            type: "integer"
+            format: "base64"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Task not found"
