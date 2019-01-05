@@ -1,13 +1,16 @@
 import { assemblePath } from '../../../base/utils'
-import * as P from '../../../base/constants'
+import { $ref, contentType, id as pid, pagesize, page, next, paging } from '../../../base/constants'
+import batch from './batch'
 
-const routes = {}
+const routes = {
+  ...batch,
+}
 
 const id = {
   name: 'id',
   in: 'path',
   description: 'task id',
-  ...P.id,
+  ...pid,
 }
 
 const addContent = {
@@ -16,7 +19,7 @@ const addContent = {
   description: 'create task data',
   required: true,
   schema: {
-    $ref: P.$ref('addTaskRequest'),
+    $ref: $ref('addTaskRequest'),
   },
 }
 
@@ -26,14 +29,14 @@ const updateContent = {
   description: 'create task data',
   required: true,
   schema: {
-    $ref: P.$ref('updateTaskRequest'),
+    $ref: $ref('updateTaskRequest'),
   },
 }
 
 const generalDescription = {
   tags: ['Task'],
-  consumes: [P.contentType.json],
-  produces: [P.contentType.json],
+  consumes: [contentType.json],
+  produces: [contentType.json],
   responses: {
     200: {
       description: 'return 200 if succeed',
@@ -47,7 +50,7 @@ routes[''] = {
     operationId: 'getTaskList',
     summary: 'Get task list',
     ...generalDescription,
-    parameters: [P.pagesize, P.page, P.next, P.paging],
+    parameters: [pagesize, page, next, paging],
   },
   post: {
     operationId: 'addTask',

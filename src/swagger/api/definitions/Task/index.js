@@ -1,6 +1,8 @@
 import { type as T } from '../../../base/constants'
 import { isCompleted, title, content, deadline } from './properties'
 
+export * from './batch'
+
 export const addTaskRequest = {
   description: 'create task request',
   type: T.object,
