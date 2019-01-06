@@ -46,7 +46,6 @@ const generalDescription = {
 
 // eslint-disable-next-line dot-notation
 routes[''] = {
-  'x-swagger-router-controller': 'Task',
   post: {
     operationId: 'batchAddTask',
     summary: 'Batch add new task',

@@ -45,7 +45,6 @@ const generalDescription = {
 }
 
 routes[''] = {
-  'x-swagger-router-controller': 'Task',
   get: {
     operationId: 'getTaskList',
     summary: 'Get task list',
@@ -61,7 +60,6 @@ routes[''] = {
 }
 
 routes['{id}'] = {
-  'x-swagger-router-controller': 'Task',
   get: {
     operationId: 'getTask',
     summary: 'Get task by id',

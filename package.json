@@ -24,6 +24,7 @@
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
     "log4js": "^3.0.6",
+    "is-promise": "^2.1.0",
     "swagger-tools": "^0.10.4",
     "ymir-models": "file:../ymir-models"
   },

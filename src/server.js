@@ -1,4 +1,3 @@
-import path from 'path'
 import express from 'express'
 import fileUpload from 'express-fileupload'
 import cors from 'cors'
@@ -8,6 +7,7 @@ import { snakeCase } from 'lodash'
 import models, { configure } from 'ymir-models'
 
 import swagger from './swagger'
+import controllers from './controllers'
 import config from './config'
 import errors from './errors'
 import { apiKeyAuth } from './authorization'
@@ -80,14 +80,14 @@ const server = async () => {
   })
 
   swaggerTools.initializeMiddleware(swagger, (middleware) => {
-    apiRouter.use(middleware.swaggerUi())
+    app.use(middleware.swaggerUi())
     apiRouter.use(middleware.swaggerMetadata())
     apiRouter.use(middleware.swaggerSecurity({
       apiKeyAuth,
     }))
 
     const options = {
-      controllers: path.join(__dirname, './controllers'),
+      controllers,
       useStubs: __DEV__ && !__TEST__, // Conditionally turn on stubs (mock mode)
       ignoreMissingHandlers: __DEV__ && !__TEST__,
     }
