@@ -1,9 +1,9 @@
 import { errors } from 'ymir-models'
 
+// const { locales } = require('../config')
 // eslint-disable-next-line import/no-dynamic-require
-const { locales } = require(`../config/${process.env.NODE_ENV || 'development'}.json`)
-// eslint-disable-next-line import/no-dynamic-require
-const localization = require(`./locale.${locales}.json`)
+// const localization = require(`./locale.${locales}.json`)
+const localization = require('./locale.zh-cn.json')
 
 errors.update(localization)
 

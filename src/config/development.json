@@ -1,5 +1,5 @@
 {
-  "name": "task manager app service",
+  "name": "ymir app service",
   "locales": "zh-cn",
   "swagger": {
     "host": "192.168.43.123",

@@ -1,14 +1,11 @@
-// import fs from 'fs'
 import path from 'path'
-// import jsyaml from 'js-yaml'
 import express from 'express'
 import fileUpload from 'express-fileupload'
 import cors from 'cors'
 import swaggerTools from 'swagger-tools'
 import log4js from 'log4js'
 import { snakeCase } from 'lodash'
-
-import models, { configure } from '../../ymir-models'
+import models, { configure } from 'ymir-models'
 
 import swagger from './swagger'
 import config from './config'
@@ -18,10 +15,7 @@ import { apiKeyAuth } from './authorization'
 global.models = models
 global.config = config
 
-// eslint-disable-next-line no-underscore-dangle
-global.__DEV__ = true
-// eslint-disable-next-line no-underscore-dangle
-global.__TEST__ = false
+const instance = process.env.NODE_APP_INSTANCE
 
 log4js.configure({
   appenders: {
@@ -44,12 +38,8 @@ const server = async () => {
   }
 
   let { port } = config.server
-  const instance = process.env.NODE_APP_INSTANCE
   if (instance) port += instance
 
-  // loading swagger config
-  // const spec = fs.readFileSync(path.join(__dirname, './swagger/swagger.yaml'), 'utf8')
-  // const swagger = jsyaml.safeLoad(spec)
   swagger.host = config.swagger.host
   swagger.schemes = config.swagger.schemes
 
@@ -90,6 +80,7 @@ const server = async () => {
   })
 
   swaggerTools.initializeMiddleware(swagger, (middleware) => {
+    apiRouter.use(middleware.swaggerUi())
     apiRouter.use(middleware.swaggerMetadata())
     apiRouter.use(middleware.swaggerSecurity({
       apiKeyAuth,
@@ -141,7 +132,7 @@ const server = async () => {
     })
   })
 
-  app.use('/docs', express.static('node_modules/swagger-ui/dist'))
+  // app.use('/docs', express.static('node_modules/swagger-ui/dist'))
   app.use('/files', express.static('files'))
 
   app.get('/api-docs', (req, res) => {
