@@ -47,7 +47,6 @@ async function copy({ watching } = {}) {
     ])
 
     const cp = async (file) => {
-      console.log('herehereherehereherehereherehere')
       if (file.indexOf('ymir-models') !== -1) {
         const relPath = file.substr(path.join(__dirname, '../').length)
         await ncp(relPath, `build/${relPath}`)
