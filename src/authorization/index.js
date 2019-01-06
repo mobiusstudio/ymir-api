@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken'
 import { errors } from 'ymir-models'
-import config from '../config'
 
 errors.register({
   ApiAuthKeyIsMissing: 401,
@@ -12,6 +11,9 @@ export const apiKeyAuth = (req, definition, apiKey, cb) => {
     cb(new errors.ApiAuthKeyIsMissingError())
     return
   }
+
+  const { config } = global
+
   try {
     const credentials = jwt.verify(apiKey, config.secret.jwt)
     req.trailers.credentials = credentials
@@ -21,4 +23,7 @@ export const apiKeyAuth = (req, definition, apiKey, cb) => {
   }
 }
 
-export const getToken = (id, role) => jwt.sign({ id, role }, config.secret.jwt, config.jwtOptions)
+export const getToken = (id, role) => {
+  const { config } = global
+  jwt.sign({ id, role }, config.secret.jwt, config.jwtOptions)
+}
