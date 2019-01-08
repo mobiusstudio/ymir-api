@@ -1,6 +1,7 @@
 import definitions from './definitions'
 import { errorDescription } from './definitions/error'
 import paths from './paths'
+import tags from './tags'
 
 const swagger = {
   swagger: '2.0',
@@ -53,6 +54,7 @@ ${errorDescription}
     //	 },
     // },
   },
+  tags,
   paths,
   definitions,
 }

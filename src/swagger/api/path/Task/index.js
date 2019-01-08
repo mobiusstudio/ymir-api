@@ -1,5 +1,6 @@
 import { assemblePath } from '../../../base/utils'
 import { $ref, contentType, id as pid, pagesize, page, next, paging } from '../../../base/constants'
+import { addTag } from '../../../base/tags'
 import batch from './batch'
 
 const routes = {
@@ -43,6 +44,10 @@ const generalDescription = {
     },
   },
 }
+
+addTag({
+  name: 'Task',
+})
 
 routes[''] = {
   get: {
