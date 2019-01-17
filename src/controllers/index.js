@@ -5,7 +5,7 @@ const controllers = {
   ...task,
 }
 
-export default Object.keys(controllers)
+const keys = Object.keys(controllers)
   .reduce((syncControllers, operationId) => {
     const newSC = syncControllers
     newSC[operationId] = (req, res, next) => {
@@ -17,3 +17,5 @@ export default Object.keys(controllers)
     }
     return newSC
   }, {})
+
+export default keys

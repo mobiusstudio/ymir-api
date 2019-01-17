@@ -2,13 +2,13 @@
   "name": "ymir app service",
   "locales": "zh-cn",
   "swagger": {
-    "host": "127.0.0.1",
+    "host": "localhost",
     "schemes": [
       "http"
     ]
   },
   "server": {
-    "port": 443
+    "port": 80
   },
   "third-party": {},
     "database": {
