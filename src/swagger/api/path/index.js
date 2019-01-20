@@ -1,4 +1,4 @@
-import task from './Task'
+import task from './task'
 
 export default {
   ...task,
