@@ -26,7 +26,7 @@ const addContent = {
 
 const updateContent = {
   in: 'body',
-  name: 'params',
+  name: 'data',
   description: 'create task data',
   required: true,
   schema: {
