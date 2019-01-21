@@ -41,7 +41,7 @@ export class Sql extends Type {
   static seqId = () => new Sql('serial').tostring({ req: false, def: null })
 }
 
-export class Joi extends Type {
+export class Jot extends Type {
   constructor(str) {
     super({
       str,
@@ -52,7 +52,7 @@ export class Joi extends Type {
   }
 }
 
-export class Swg extends Type {
+export class Swt extends Type {
   constructor(str) {
     super({
       str,
@@ -63,14 +63,26 @@ export class Swg extends Type {
   }
 }
 
-export class Rul {
-  constructor(rul) {
-    this.rul = rul
+export class Joi {
+  constructor(joi) {
+    this.joi = joi
   }
 
   torule = ({ req, def }) => {
-    if (req === true || req === 'true' || req === 1) this.rul = this.rul.required()
-    if (def !== undefined) this.rul = this.rul.default(def)
-    return this.rul
+    if (req === true || req === 'true' || req === 1) this.joi = this.joi.required()
+    if (def !== undefined) this.joi = this.joi.default(def)
+    return this.joi
+  }
+}
+
+export class Swg {
+  constructor(swg) {
+    this.swg = swg
+  }
+
+  toinstance = ({ req, def }) => {
+    if (req === true || req === 'true' || req === 1) this.swg.required = true
+    if (def !== undefined) this.swg.default = def
+    return this.swg
   }
 }
