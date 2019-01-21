@@ -1,9 +1,9 @@
-import { type as T } from '../../../base/constants'
+import { type as T } from '../../../swagger/base/constants'
 import { isCompleted, title, content, deadline } from './properties'
 
-export * from './batch'
+export const def = {}
 
-export const addTaskRequest = {
+def.addTaskRequest = {
   description: 'create task request',
   type: T.object,
   properties: {
@@ -14,7 +14,7 @@ export const addTaskRequest = {
   },
 }
 
-export const updateTaskRequest = {
+def.updateTaskRequest = {
   description: 'update task request',
   type: T.object,
   properties: {

@@ -1,4 +1,4 @@
-const test = {
+export const test = {
   get: {
     operationId: 'test',
     tags: ['Test'],
@@ -13,5 +13,3 @@ const test = {
     },
   },
 }
-
-export default test

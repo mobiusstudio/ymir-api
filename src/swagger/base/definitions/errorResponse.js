@@ -1,6 +1,6 @@
 import { $ref, type } from '../constants'
 
-const errorResponse = {
+export const errorResponse = {
   type: type.object,
   required: ['error'],
   properties: {
@@ -9,5 +9,3 @@ const errorResponse = {
     },
   },
 }
-
-export default errorResponse

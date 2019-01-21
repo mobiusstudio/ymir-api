@@ -1,4 +1,6 @@
-export const addTask = async (req, res) => {
+export const ctr = {}
+
+ctr.addTask = async (req, res) => {
   try {
     const { Task } = global.models
     const data = req.swagger.params.data.value
@@ -10,7 +12,7 @@ export const addTask = async (req, res) => {
   }
 }
 
-export const getTaskList = async (req, res) => {
+ctr.getTaskList = async (req, res) => {
   try {
     const { Task } = global.models
     const { page, pagesize, next, paging } = req.swagger.params
@@ -30,7 +32,7 @@ export const getTaskList = async (req, res) => {
   }
 }
 
-export const getTask = async (req, res) => {
+ctr.getTask = async (req, res) => {
   try {
     const { Task } = global.models
     const id = req.swagger.params.id.value
@@ -42,7 +44,7 @@ export const getTask = async (req, res) => {
   }
 }
 
-export const updateTask = async (req, res) => {
+ctr.updateTask = async (req, res) => {
   try {
     const { Task } = global.models
     const id = req.swagger.params.id.value
@@ -58,7 +60,7 @@ export const updateTask = async (req, res) => {
   }
 }
 
-export const deleteTask = async (req, res) => {
+ctr.deleteTask = async (req, res) => {
   try {
     const { Task } = global.models
     const id = req.swagger.params.id.value

@@ -1,4 +1,4 @@
-import { type as T } from '../../../base/constants'
+import { type as T } from '../../../swagger/base/constants'
 
 export const id = {
   description: 'id',

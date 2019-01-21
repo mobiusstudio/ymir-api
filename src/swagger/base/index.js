@@ -1,9 +1,9 @@
-import definitions from './definitions'
+import { tags } from './tags'
+import { paths } from './paths'
+import { definitions } from './definitions'
 import { errorDescription } from './definitions/error'
-import paths from './paths'
-import tags from './tags'
 
-const swagger = {
+export const swagger = {
   swagger: '2.0',
   info: {
     title: 'Ymir API',
@@ -58,5 +58,3 @@ ${errorDescription}
   paths,
   definitions,
 }
-
-export default swagger

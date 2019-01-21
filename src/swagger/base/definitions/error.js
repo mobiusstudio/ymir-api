@@ -20,7 +20,7 @@ ${errorCodeTableBody}
 
 `
 
-const error = {
+export const error = {
   type: type.object,
   required: ['code'],
   description: '见文档开头错误号说明。',
@@ -33,5 +33,3 @@ const error = {
     },
   },
 }
-
-export default error

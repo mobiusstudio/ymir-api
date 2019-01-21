@@ -6,8 +6,9 @@ import log4js from 'log4js'
 import { snakeCase } from 'lodash'
 import models, { configure } from 'ymir-models'
 
-import swagger from './swagger'
-import controllers from './controllers'
+import { register } from './api'
+import { swagger } from './swagger'
+import { controllers } from './controllers'
 import config from './config'
 import errors from './errors'
 import { apiKeyAuth } from './authorization'
@@ -16,6 +17,9 @@ global.models = models
 global.config = config
 
 const instance = process.env.NODE_APP_INSTANCE
+
+register()
+console.log(controllers)
 
 log4js.configure({
   appenders: {

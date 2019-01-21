@@ -1,6 +1,6 @@
 import { type } from '../constants'
 
-const uploadToken = {
+export const uploadToken = {
   type: type.object,
   required: [
     'type', 'values',
@@ -19,5 +19,3 @@ const uploadToken = {
     },
   },
 }
-
-export default uploadToken

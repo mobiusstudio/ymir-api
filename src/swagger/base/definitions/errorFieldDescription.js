@@ -1,6 +1,6 @@
 import { type } from '../constants'
 
-const errorFieldDescription = {
+export const errorFieldDescription = {
   type: type.object,
   properties: {
     code: {
@@ -23,5 +23,3 @@ const errorFieldDescription = {
     },
   },
 }
-
-export default errorFieldDescription

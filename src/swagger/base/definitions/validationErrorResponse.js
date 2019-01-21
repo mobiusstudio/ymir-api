@@ -1,6 +1,6 @@
 import { $ref, type } from '../constants'
 
-const validationErrorResponse = {
+export const validationErrorResponse = {
   type: type.object,
   required: ['error'],
   properties: {
@@ -9,5 +9,3 @@ const validationErrorResponse = {
     },
   },
 }
-
-export default validationErrorResponse

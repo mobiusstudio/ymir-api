@@ -1,15 +1,12 @@
-import error from './error'
-import errorResponse from './errorResponse'
-import validationError from './validationError'
-import validationErrorResponse from './validationErrorResponse'
-import errorFieldDescription from './errorFieldDescription'
-import uploadToken from './uploadToken'
+import { error } from './error'
+import { errorResponse } from './errorResponse'
+import { validationError } from './validationError'
+import { validationErrorResponse } from './validationErrorResponse'
+import { errorFieldDescription } from './errorFieldDescription'
+import { uploadToken } from './uploadToken'
 import { PagingData } from '../constants'
 
-import * as apiDefinitions from '../../api/definitions'
-
-
-const definitions = {
+export const definitions = {
   error,
   errorResponse,
   validationError,
@@ -17,7 +14,11 @@ const definitions = {
   errorFieldDescription,
   uploadToken,
   PagingData,
-  ...apiDefinitions,
 }
 
-export default definitions
+export const addDefinitions = (data) => {
+  Object.keys(data).forEach((key) => {
+    if (Object.keys(definitions).includes(key)) throw new Error(`Duplicate definition name: ${key}`)
+    else definitions[key] = data[key]
+  })
+}

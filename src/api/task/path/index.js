@@ -1,10 +1,7 @@
-import { assemblePath } from '../../../base/utils'
-import { $ref, contentType, id as pid, pagesize, page, next, paging } from '../../../base/constants'
-import { addTag } from '../../../base/tags'
-import batch from './batch'
+import { assemblePath, addTag } from '../../../swagger'
+import { $ref, contentType, id as pid, pagesize, page, next, paging } from '../../../swagger/base/constants'
 
 const routes = {
-  ...batch,
 }
 
 const id = {
@@ -85,6 +82,5 @@ routes['{id}'] = {
   },
 }
 
-const basePath = 'task'
-
-export default assemblePath(routes, basePath)
+const basePath = '/task'
+export const pth = assemblePath(routes, basePath)
