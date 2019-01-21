@@ -17,6 +17,8 @@
     "test:watch": "npm run test -- --reporter min --watch"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "@babel/runtime": "^7.2.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-fileupload": "^1.1.1-alpha.1",
@@ -33,6 +35,8 @@
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/register": "^7.0.0",
     "babel-eslint": "^10.0.1",

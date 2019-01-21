@@ -1,26 +1,21 @@
-import { type as T } from '../../../swagger/base/constants'
+import { typeMap as T } from '../../../libs/types'
 
-export const id = {
+export const id = T.get('id').swg({
   description: 'id',
-  type: T.integer,
-}
+})
 
-export const isCompleted = {
+export const isCompleted = T.get('boolean').swg({
   description: 'task completion status',
-  type: T.boolean,
-}
+})
 
-export const title = {
+export const title = T.get('string').swg({
   description: 'task title',
-  type: T.string,
-}
+})
 
-export const content = {
+export const content = T.get('string').swg({
   description: 'task content',
-  type: T.string,
-}
+})
 
-export const deadline = {
+export const deadline = T.get('timestamp').swg({
   description: 'task content',
-  type: T.integer,
-}
+})

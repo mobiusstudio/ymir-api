@@ -8,7 +8,7 @@ export const number = {
     jot: ({ req, def }) => new Jot('joi.number()').tostring({ req, def }),
     joi: ({ req, def }) => new Joi(joi.number()).torule({ req, def }),
     swt: ({ req, def }) => new Swt(`type: 'number'`).tostring({ req, def }),
-    swg: ({ req, def }) => new Swg({ type: 'number' }).toinstance({ req, def }),
+    swg: obj => new Swg({ type: 'number' }).toinstance(obj),
   },
 
   int: {
@@ -16,7 +16,7 @@ export const number = {
     jot: ({ req, def }) => new Jot('joi.number().integer()').tostring({ req, def }),
     joi: ({ req, def }) => new Joi(joi.number().integer()).torule({ req, def }),
     swt: ({ req, def }) => new Swt(`type: 'integer',\nformat: 'int32'`).tostring({ req, def }),
-    swg: ({ req, def }) => new Swg({ type: 'integer', format: 'int32' }).toinstance({ req, def }),
+    swg: obj => new Swg({ type: 'integer', format: 'int32' }).toinstance(obj),
   },
 
   bigint: {
@@ -24,7 +24,7 @@ export const number = {
     jot: ({ req, def }) => new Jot('joi.number().integer()').tostring({ req, def }),
     joi: ({ req, def }) => new Joi(joi.number().integer()).torule({ req, def }),
     swt: ({ req, def }) => new Swt(`type: 'integer',\nformat: 'int64'`).tostring({ req, def }),
-    swg: ({ req, def }) => new Swg({ type: 'integer', format: 'int64' }).toinstance({ req, def }),
+    swg: obj => new Swg({ type: 'integer', format: 'int64' }).toinstance(obj),
   },
 
   float: {
@@ -32,7 +32,7 @@ export const number = {
     jot: ({ req, def }) => new Jot('joi.number().precision()').tostring({ req, def }),
     joi: ({ req, def }) => new Joi(joi.number().precision()).torule({ req, def }),
     swt: ({ req, def }) => new Swt(`type: 'number',\nformat: 'float'`).tostring({ req, def }),
-    swg: ({ req, def }) => new Swg({ type: 'number', format: 'float' }).toinstance({ req, def }),
+    swg: obj => new Swg({ type: 'number', format: 'float' }).toinstance(obj),
   },
 
   double: {
@@ -40,7 +40,7 @@ export const number = {
     jot: ({ req, def }) => new Jot('joi.number().precision()').tostring({ req, def }),
     joi: ({ req, def }) => new Joi(joi.number().precision()).torule({ req, def }),
     swt: ({ req, def }) => new Swt(`type: 'number',\nformat: 'double'`).tostring({ req, def }),
-    swg: ({ req, def }) => new Swg({ type: 'number', format: 'double' }).toinstance({ req, def }),
+    swg: obj => new Swg({ type: 'number', format: 'double' }).toinstance(obj),
   },
 
   // numeric: {
@@ -48,7 +48,7 @@ export const number = {
   //   jot: ({ req, def, scaleValue }) => new Jot(`joi.number().precision(${scaleValue})`).tostring({ req, def }),
   //   joi: ({ req, def, scaleValue }) => new Joi(joi.number().precision(scaleValue)).torule({ req, def }),
   //   swt: ({ req, def }) => new Swt(`type: 'number',\nformat: 'double'`).tostring({ req, def }),
-  //   swg: ({ req, def }) => new Swg({ type: 'number', format: 'double' }).toinstance({ req, def }),
+  //   swg: obj => new Swg({ type: 'number', format: 'double' }).toinstance(obj),
   // },
 
   money: {
@@ -56,7 +56,7 @@ export const number = {
     jot: ({ req, def }) => new Jot('joi.number().precision(2)').tostring({ req, def }),
     joi: ({ req, def }) => new Joi(joi.number().precision(2)).torule({ req, def }),
     swt: ({ req, def }) => new Swt(`type: 'number',\nformat: 'double'`).tostring({ req, def }),
-    swg: ({ req, def }) => new Swg({ type: 'number', format: 'double' }).toinstance({ req, def }),
+    swg: obj => new Swg({ type: 'number', format: 'double' }).toinstance(obj),
   },
 
   timestamp: {
@@ -64,6 +64,6 @@ export const number = {
     jot: ({ req, def }) => new Jot('joi.date().timestamp()').tostring({ req, def }),
     joi: ({ req, def }) => new Joi(joi.date().timestamp()).torule({ req, def }),
     swt: ({ req, def }) => new Swt(`type: 'integer',\nformat: 'int64'`).tostring({ req, def }),
-    swg: ({ req, def }) => new Swg({ type: 'integer', format: 'int64' }).toinstance({ req, def }),
+    swg: obj => new Swg({ type: 'integer', format: 'int64' }).toinstance(obj),
   },
 }

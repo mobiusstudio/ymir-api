@@ -1,15 +1,16 @@
+import { typeMap as T } from '../../../libs/types'
 import { assemblePath, addTag } from '../../../swagger'
-import { $ref, contentType, id as pid, pagesize, page, next, paging } from '../../../swagger/base/constants'
+import { contentType, pagesize, page, next, paging } from '../../../swagger/base/constants'
 
 const routes = {
 }
 
-const id = {
+const id = T.get('id').swg({
+  description: 'task id',
   name: 'id',
   in: 'path',
-  description: 'task id',
-  ...pid,
-}
+  required: true,
+})
 
 const addContent = {
   in: 'body',
@@ -17,7 +18,7 @@ const addContent = {
   description: 'create task data',
   required: true,
   schema: {
-    $ref: $ref('addTaskRequest'),
+    $ref: '#/definitions/addTaskRequest',
   },
 }
 
@@ -27,7 +28,7 @@ const updateContent = {
   description: 'create task data',
   required: true,
   schema: {
-    $ref: $ref('updateTaskRequest'),
+    $ref: '#/definitions/updateTaskRequest',
   },
 }
 

@@ -68,7 +68,7 @@ export class Joi {
     this.joi = joi
   }
 
-  torule = ({ req, def }) => {
+  torule = ({ req = false, def = null } = { req: false, def: null }) => {
     if (req === true || req === 'true' || req === 1) this.joi = this.joi.required()
     if (def !== undefined) this.joi = this.joi.default(def)
     return this.joi
@@ -80,9 +80,31 @@ export class Swg {
     this.swg = swg
   }
 
-  toinstance = ({ req, def }) => {
-    if (req === true || req === 'true' || req === 1) this.swg.required = true
-    if (def !== undefined) this.swg.default = def
+  toinstance = (obj = null) => {
+    if (obj) {
+      const { required = null, req = null, default: df = null, def = null, ...arg } = obj
+      if (required || req) this.swg.required = required || req
+      if (df || def) this.swg.default = df || def
+      return {
+        ...this.swg,
+        ...arg,
+      }
+    }
     return this.swg
   }
 }
+
+// export const generateSwg = obj => ({
+//   required = false,
+//   req = false,
+//   default: df = null,
+//   def = null,
+//   ...arg
+// } = {
+//   required: false,
+//   default: null,
+// }) => new Swg(obj).toinstance({
+//   req: required || req,
+//   def: df || def,
+//   ...arg,
+// })

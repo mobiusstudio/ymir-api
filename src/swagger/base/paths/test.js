@@ -1,3 +1,10 @@
+import { generateErrorResponses } from '../constants'
+import errors from '../../../errors'
+
+errors.register({
+  InvalidIdentification: 400,
+})
+
 export const test = {
   get: {
     operationId: 'test',
@@ -7,9 +14,9 @@ export const test = {
       200: {
         description: 'return 200 if succeed',
       },
-      // ...generateErrorResponses([
-      // 	errors.InvalidIdentificationError,
-      // ]),
+      ...generateErrorResponses([
+        errors.InvalidIdentificationError,
+      ]),
     },
   },
 }

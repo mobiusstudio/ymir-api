@@ -1,5 +1,5 @@
 import { snakeCase } from 'lodash'
-import { type } from '../constants'
+import { typeMap as T } from '../../../libs/types'
 import errors from '../../../errors'
 
 const errorCodeTableBody = Object.keys(errors)
@@ -20,16 +20,11 @@ ${errorCodeTableBody}
 
 `
 
-export const error = {
-  type: type.object,
-  required: ['code'],
+export const error = T.get('object').swg({
   description: '见文档开头错误号说明。',
+  required: ['code'],
   properties: {
-    code: {
-      type: type.string,
-    },
-    message: {
-      type: type.string,
-    },
+    code: T.get('string').swg(),
+    message: T.get('string').swg(),
   },
-}
+})

@@ -1,25 +1,13 @@
-import { type } from '../constants'
+import { typeMap as T } from '../../../libs/types'
 
-export const errorFieldDescription = {
-  type: type.object,
+export const errorFieldDescription = T.get('object').swg({
   properties: {
-    code: {
-      type: type.string,
-    },
-    field: {
-      type: type.string,
-    },
-    message: {
-      type: type.string,
-    },
-    recommendedValue: {
-      type: type.string,
-    },
-    path: {
-      type: type.array,
-      items: {
-        type: type.string,
-      },
-    },
+    code: T.get('string').swg(),
+    field: T.get('string').swg(),
+    message: T.get('string').swg(),
+    recommendedValue: T.get('string').swg(),
+    path: T.get('array').swg({
+      items: T.get('string').swg(),
+    }),
   },
-}
+})

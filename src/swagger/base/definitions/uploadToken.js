@@ -1,21 +1,14 @@
-import { type } from '../constants'
+import { typeMap as T } from '../../../libs/types'
 
-export const uploadToken = {
-  type: type.object,
-  required: [
-    'type', 'values',
-  ],
+export const uploadToken = T.get('object').swg({
+  required: ['type', 'values'],
   properties: {
-    type: {
-      type: type.string,
+    type: T.get('string').swg({
       description: 'token 的类型，目前只有 `qiniu`',
-    },
-    values: {
+    }),
+    values: T.get('object').swg({
       description: '描述 token 信息的 Key-Value-Pair，string-to-string',
-      type: type.object,
-      additionalProperties: {
-        type: type.string,
-      },
-    },
+      additionalProperties: T.get('string').swg(),
+    }),
   },
-}
+})

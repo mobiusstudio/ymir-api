@@ -1,26 +1,24 @@
-import { type as T } from '../../../swagger/base/constants'
+import { typeMap as T } from '../../../libs/types'
 import { isCompleted, title, content, deadline } from './properties'
 
 export const def = {}
 
-def.addTaskRequest = {
+def.addTaskRequest = T.get('object').swg({
   description: 'create task request',
-  type: T.object,
   properties: {
     isCompleted,
     title,
     content,
     deadline,
   },
-}
+})
 
-def.updateTaskRequest = {
+def.updateTaskRequest = T.get('object').swg({
   description: 'update task request',
-  type: T.object,
   properties: {
     isCompleted,
     title,
     content,
     deadline,
   },
-}
+})

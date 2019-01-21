@@ -8,6 +8,6 @@ export const boolean = {
     jot: ({ req, def }) => new Jot('joi.boolean()').tostring({ req, def }),
     joi: ({ req, def }) => new Joi(joi.boolean()).torule({ req, def }),
     swt: ({ req, def }) => new Swt(`type: 'boolean'`).tostring({ req, def }),
-    swg: ({ req, def }) => new Swg({ type: 'boolean' }).toinstance({ req, def }),
+    swg: obj => new Swg({ type: 'boolean' }).toinstance(obj),
   },
 }

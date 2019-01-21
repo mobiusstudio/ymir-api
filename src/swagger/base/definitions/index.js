@@ -4,7 +4,7 @@ import { validationError } from './validationError'
 import { validationErrorResponse } from './validationErrorResponse'
 import { errorFieldDescription } from './errorFieldDescription'
 import { uploadToken } from './uploadToken'
-import { PagingData } from '../constants'
+import { pagingData } from '../constants'
 
 export const definitions = {
   error,
@@ -13,7 +13,7 @@ export const definitions = {
   validationErrorResponse,
   errorFieldDescription,
   uploadToken,
-  PagingData,
+  pagingData,
 }
 
 export const addDefinitions = (data) => {

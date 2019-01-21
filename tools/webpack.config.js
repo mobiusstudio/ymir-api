@@ -11,19 +11,7 @@ const GLOBALS = {
 
 // 打入 babel 所需要的 runtime，生产环境不再需要安装 babel packages
 const compiledPackages = [
-  'babel-regenerator-runtime',
-  'babel-runtime/regenerator',
-  'babel-runtime/helpers/asyncToGenerator',
-  'babel-runtime/helpers/extends',
-  'babel-runtime/core-js/json/stringify',
-  'babel-runtime/core-js/object/keys',
-  'babel-runtime/core-js/promise',
-  'babel-runtime/core-js/get-iterator',
-  'babel-runtime/helpers/classCallCheck',
-  'babel-runtime/helpers/createClass',
-  'babel-runtime/helpers/slicedToArray',
-  'babel-runtime/helpers/toConsumableArray',
-  'babel-runtime/helpers/typeof',
+  '@babel/runtime',
 ]
 
 const config = {
