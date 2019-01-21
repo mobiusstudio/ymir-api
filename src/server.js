@@ -19,7 +19,6 @@ global.config = config
 const instance = process.env.NODE_APP_INSTANCE
 
 register()
-console.log(controllers)
 
 log4js.configure({
   appenders: {
