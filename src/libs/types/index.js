@@ -23,9 +23,6 @@ Object.keys(types).forEach((p) => {
   })
 })
 
-console.log(typeMap.get('string').swg({ req: true, def: '123' }))
-console.log(typeMap.get('string').swg())
-
 export const find = s => Object.keys(types).find(p => p === s || Object.keys(types[p]).includes(s))
 
 export { schemaRules } from './schema'
