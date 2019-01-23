@@ -5,8 +5,10 @@ ctr.addTask = async (req, res) => {
     const { Task } = global.models
     const data = req.swagger.params.data.value
     global.logger.trace('Add new task', data)
-    const object = await new Task().add(data)
-    return res.json(object)
+    const result = await new Task().add({
+      data,
+    })
+    return res.json(result)
   } catch (error) {
     throw error
   }
@@ -37,7 +39,7 @@ ctr.getTask = async (req, res) => {
     const { Task } = global.models
     const id = req.swagger.params.id.value
     global.logger.trace('Get task', id)
-    const object = await new Task().from().where`id = ${id}`.select().do()
+    const object = await new Task().from().where`id = ${id}`.do()
     return res.json(object)
   } catch (error) {
     throw error
