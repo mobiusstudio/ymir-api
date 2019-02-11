@@ -1,8 +1,31 @@
 export const ctr = {}
 
+// ctr.getUserList = async (req, res) => {
+//   try {
+//     const { User } = global.models
+//     const { page, pagesize, next, paging } = req.swagger.params
+//     const params = {
+//       page: page.value,
+//       pagesize: pagesize.value,
+//       next: next.value,
+//       nextKey: 'id',
+//       filters: paging.value.filters,
+//       orderBy: paging.value.orderBy,
+//     }
+//     global.logger.trace('Get user list', params)
+//     const items = await new User().from().do(params)
+//     return res.json(items)
+//   } catch (error) {
+//     throw error
+//   }
+// }
+
 ctr.getUserList = async (req, res) => {
   try {
-    const { User } = global.models
+    const { User, UserProfile, Car } = global.models
+    const user = new User()
+    const profile = new UserProfile()
+    const car = new Car()
     const { page, pagesize, next, paging } = req.swagger.params
     const params = {
       page: page.value,
@@ -12,13 +35,16 @@ ctr.getUserList = async (req, res) => {
       filters: paging.value.filters,
       orderBy: paging.value.orderBy,
     }
-    global.logger.trace('Get user list', params)
-    const items = await new User().from().do(params)
+    global.logger.trace('Get user view list', params)
+    const userOn = { userId: '"user".user.id' }
+    const carOn = { carId: '"car".car.id' }
+    const items = await profile.from().ljoin(user, userOn).ljoin(car, carOn).do(paging)
     return res.json(items)
   } catch (error) {
     throw error
   }
 }
+
 ctr.getUser = async (req, res) => {
   try {
     const { User } = global.models
