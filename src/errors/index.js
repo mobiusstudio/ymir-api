@@ -1,4 +1,4 @@
-import { errors } from 'ymir-models'
+import { errors } from 'models'
 
 // const { locales } = require('../config')
 // eslint-disable-next-line import/no-dynamic-require

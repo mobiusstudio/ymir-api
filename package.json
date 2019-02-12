@@ -7,8 +7,6 @@
     "npm": "6.4.1"
   },
   "scripts": {
-    "model": "rm -rf node_modules/ymir-models; npm install",
-    "prestart": "npm install",
     "start": "npx babel-node tools/run start",
     "deploy": "npx babel-node tools/run deploy",
     "build": "npx babel-node tools/run build",
@@ -29,7 +27,7 @@
     "lodash": "^4.17.11",
     "log4js": "^3.0.6",
     "swagger-tools": "^0.10.4",
-    "ymir-models": "file:../ymir-models"
+    "models": "file:../ymir-models"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

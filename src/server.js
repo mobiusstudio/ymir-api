@@ -4,7 +4,7 @@ import cors from 'cors'
 import swaggerTools from 'swagger-tools'
 import log4js from 'log4js'
 import { snakeCase } from 'lodash'
-import models, { configure } from 'ymir-models'
+import models, { configure } from 'models'
 
 import { register } from './api'
 import { swagger } from './swagger'

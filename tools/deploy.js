@@ -7,7 +7,7 @@ import check from './check'
 const FORCE = process.argv.includes('force')
 
 async function deploy() {
-  const valid = await check('ymir-models')
+  const valid = await check('models')
   if (!valid) {
     console.log('Deploy terminated.')
     return Promise.reject()
@@ -33,7 +33,7 @@ async function deploy() {
 
   const cmd = [
     'rsync -avz --delete',
-    '--include="/node_modules/ymir-models"',
+    '--include="/node_modules/models"',
     // eslint-disable-next-line prefer-template
     (excludes.join('" --exclude="') + '"').slice(2),
     '-e "ssh -o StrictHostKeyChecking=no"',

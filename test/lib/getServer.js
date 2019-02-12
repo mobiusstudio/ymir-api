@@ -1,4 +1,4 @@
-import { configure } from 'ymir-models'
+import { configure } from 'models'
 import server from '../../src/server'
 import options from '../../src/config'
 

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { errors } from 'ymir-models'
+import { errors } from 'models'
 
 errors.register({
   ApiAuthKeyIsMissing: 401,

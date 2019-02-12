@@ -7,7 +7,7 @@ import pkg from '../package.json'
 async function copy({ watching } = {}) {
   const ncp = Promise.promisify(require('ncp'))
 
-  await fs.makeDir('build/node_modules/ymir-models')
+  await fs.makeDir('build/node_modules/models')
 
   const env = !process.argv.includes('release') ? 'development' : 'production'
   const deploying = process.argv.includes('deploy')
@@ -15,9 +15,9 @@ async function copy({ watching } = {}) {
 
   const cps = [
     // ncp('node_modules/swagger-ui', 'build/node_modules/swagger-ui'),
-    ncp('node_modules/ymir-models/dist', 'build/node_modules/ymir-models/dist'),
-    ncp('node_modules/ymir-models/package.json', 'build/node_modules/ymir-models/package.json'),
-    ncp('node_modules/ymir-models/node_modules', 'build/node_modules/ymir-models/node_modules'),
+    ncp('node_modules/models/dist', 'build/node_modules/models/dist'),
+    ncp('node_modules/models/package.json', 'build/node_modules/models/package.json'),
+    ncp('node_modules/models/node_modules', 'build/node_modules/models/node_modules'),
   ]
 
   if (!deploying || FORCE) {
@@ -29,7 +29,8 @@ async function copy({ watching } = {}) {
 
   // 随部署发布，无需再次安装
   // delete pkg.dependencies['swagger-ui']
-  delete pkg.dependencies['ymir-models']
+  // eslint-disable-next-line dot-notation
+  delete pkg.dependencies['models']
 
   await fs.writeFile('./build/package.json', JSON.stringify({
     private: true,
@@ -43,11 +44,11 @@ async function copy({ watching } = {}) {
   if (watching) {
     const watcher = await watch([
       `src/config/${env}.json`,
-      'node_modules/ymir-models/dist/*.*',
+      'node_modules/models/dist/*.*',
     ])
 
     const cp = async (file) => {
-      if (file.indexOf('ymir-models') !== -1) {
+      if (file.indexOf('models') !== -1) {
         const relPath = file.substr(path.join(__dirname, '../').length)
         await ncp(relPath, `build/${relPath}`)
       } else if (file.indexOf(`src/config/${env}.json`) !== -1) {

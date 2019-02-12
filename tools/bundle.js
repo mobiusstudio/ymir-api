@@ -8,7 +8,7 @@ function bundle({ watching } = {}) {
     const onComplete = async (err, stats) => {
       if (err) return reject(err)
       console.log(stats.toString(webpackConfig[0].stats))
-      await check('ymir-models')
+      await check('models')
       return resolve(bundler)
     }
     if (watching) bundler.watch(200, onComplete)
