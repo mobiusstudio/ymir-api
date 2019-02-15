@@ -1,5 +1,5 @@
 import Hashids from 'hashids'
-import errors from '../errors'
+import { errors } from '../errors'
 
 export const validateEmail = (email) => {
   if (!email) throw new errors.EmailInvalidError()

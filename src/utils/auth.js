@@ -1,4 +1,4 @@
-import errors from '../errors'
+import { errors } from '../errors'
 
 export const requireCurrentAccount = (req) => {
   const id = req.credentials && req.credentials.id

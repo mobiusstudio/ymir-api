@@ -1,14 +1,19 @@
-import definitions from './definitions'
+import { tags } from './tags'
+import { paths } from './paths'
+import { definitions } from './definitions'
 import { errorDescription } from './definitions/error'
-import paths from './paths'
-import tags from './tags'
 
-const swagger = {
+export const swagger = {
   swagger: '2.0',
   info: {
-    title: 'Owlly Management API',
+    title: 'Ymir API',
     description: `
-the API of Owlly Management
+the API of Ymir
+
+## Error code description
+
+${errorDescription}
+
 <style>
 .info_description table, .info_description thead, .info_description tbody, .info_description tr {
   width: 100%;
@@ -26,13 +31,14 @@ the API of Owlly Management
   overflow-y: auto;
   overflow-x: hidden;
 }
+
 </style>
 `,
     version: '0.0.1',
   },
   host: 'localhost:10001', // TODO base on env
   schemes: ['http', 'https'],
-  basePath: '/',
+  basePath: '/api/v0',
   securityDefinitions: {
     apiKeyAuth: {
       type: 'apiKey',
@@ -52,5 +58,3 @@ the API of Owlly Management
   paths,
   definitions,
 }
-
-export default swagger

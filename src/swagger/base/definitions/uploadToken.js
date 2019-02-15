@@ -1,23 +1,13 @@
-import { type } from '../constants'
-
-const uploadToken = {
-  type: type.object,
-  required: [
-    'type', 'values',
-  ],
+export const uploadToken = {
+  required: ['type', 'values'],
   properties: {
     type: {
-      type: type.string,
       description: 'token 的类型，目前只有 `qiniu`',
+      type: 'string',
     },
     values: {
       description: '描述 token 信息的 Key-Value-Pair，string-to-string',
-      type: type.object,
-      additionalProperties: {
-        type: type.string,
-      },
+      additionalProperties: { type: 'string' },
     },
   },
 }
-
-export default uploadToken

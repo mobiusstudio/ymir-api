@@ -1,27 +1,12 @@
-import { type } from '../constants'
-
-const errorFieldDescription = {
-  type: type.object,
+export const errorFieldDescription = {
   properties: {
-    code: {
-      type: type.string,
-    },
-    field: {
-      type: type.string,
-    },
-    message: {
-      type: type.string,
-    },
-    recommendedValue: {
-      type: type.string,
-    },
+    code: { type: 'string' },
+    field: { type: 'string' },
+    message: { type: 'string' },
+    recommendedValue: { type: 'string' },
     path: {
-      type: type.array,
-      items: {
-        type: type.string,
-      },
+      type: 'array',
+      items: { type: 'string' },
     },
   },
 }
-
-export default errorFieldDescription

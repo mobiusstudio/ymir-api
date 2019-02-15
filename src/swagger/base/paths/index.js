@@ -1,10 +1,17 @@
 import { assemblePath } from '../utils'
-import apiPaths from '../../api'
-
-const routes = {
-  ...apiPaths,
-}
+import { test } from './test'
 
 const basePath = ''
 
-export default assemblePath(routes, basePath)
+const routes = {
+  test,
+}
+
+export const paths = assemblePath(routes, basePath)
+
+export const addPaths = (data) => {
+  Object.keys(data).forEach((key) => {
+    if (Object.keys(paths).includes(key)) throw new Error(`Duplicate path: ${key}`)
+    else paths[key] = data[key]
+  })
+}

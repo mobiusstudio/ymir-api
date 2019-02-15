@@ -3,13 +3,13 @@
   "locales": "zh-cn",
   "swagger": {
     "host": "127.0.0.1",
-    "schemes": [ "http" ]
+    "schemes": ["http"]
   },
   "server": {
     "port": 5123
   },
   "third-party": {},
-  "database": "postgresql://<username>:<password>@<url>:<port>/<database>",
+  "database": "postgresql://<username>:<password>@<host>:<port>/<database>",
   "jwtOptions": {
     "expiresIn": "180d"
   },

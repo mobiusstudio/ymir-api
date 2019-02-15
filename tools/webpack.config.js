@@ -13,7 +13,7 @@ const GLOBALS = {
 const config = {
   context: path.resolve(__dirname, '../src'),
 
-  entry: ['@babel/polyfill', './start.js'],
+  entry: ['@babel/polyfill/noConflict', './start.js'],
 
   output: {
     path: path.resolve(__dirname, '../build'),
@@ -35,6 +35,7 @@ const config = {
       raw: true,
       entryOnly: false,
     }),
+    new webpack.IgnorePlugin(/^pg-native$/),
   ],
 
   node: {

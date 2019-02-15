@@ -1,13 +1,9 @@
-import { $ref, type } from '../constants'
 
-const errorResponse = {
-  type: type.object,
+export const errorResponse = {
   required: ['error'],
   properties: {
     error: {
-      $ref: $ref('error'),
+      $ref: '#/definitions/error',
     },
   },
 }
-
-export default errorResponse

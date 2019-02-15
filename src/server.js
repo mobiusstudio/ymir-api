@@ -6,12 +6,14 @@ import log4js from 'log4js'
 import { snakeCase } from 'lodash'
 import { connect } from 'chaos-model'
 
-import swagger from './swagger'
-import controllers from './controllers'
-import config from './config'
-import errors from './errors'
+import { register } from './api'
+import { swagger } from './swagger'
+import { controllers } from './controllers'
+import { config } from './config'
+import { errors } from './errors'
 import { apiKeyAuth } from './authorization'
 
+register()
 global.config = config
 
 const instance = process.env.NODE_APP_INSTANCE

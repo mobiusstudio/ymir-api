@@ -1,6 +1,5 @@
 import { snakeCase } from 'lodash'
-import { type } from '../constants'
-import errors from '../../../errors'
+import { errors } from '../../../errors'
 
 const errorCodeTableBody = Object.keys(errors)
   .filter(key => typeof errors[key] === 'function')
@@ -20,18 +19,11 @@ ${errorCodeTableBody}
 
 `
 
-const error = {
-  type: type.object,
-  required: ['code'],
+export const error = {
   description: '见文档开头错误号说明。',
+  required: ['code'],
   properties: {
-    code: {
-      type: type.string,
-    },
-    message: {
-      type: type.string,
-    },
+    code: { type: 'string' },
+    message: { type: 'string' },
   },
 }
-
-export default error

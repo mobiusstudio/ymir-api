@@ -1,13 +1,8 @@
-import { $ref, type } from '../constants'
-
-const validationErrorResponse = {
-  type: type.object,
+export const validationErrorResponse = {
   required: ['error'],
   properties: {
     error: {
-      $ref: $ref('validationError'),
+      $ref: '#/definitions/validationError',
     },
   },
 }
-
-export default validationErrorResponse

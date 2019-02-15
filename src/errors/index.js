@@ -21,4 +21,4 @@ errors.register({
   SuperAdmin: 400,
 })
 
-export default errors
+export { errors }
