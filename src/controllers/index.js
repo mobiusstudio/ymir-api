@@ -1,6 +1,6 @@
 import isPromise from 'is-promise'
 
-import * as task from './task'
+import { task } from './task'
 
 const ctrs = {
   ...task,
