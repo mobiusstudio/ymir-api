@@ -4,21 +4,20 @@ import cors from 'cors'
 import swaggerTools from 'swagger-tools'
 import log4js from 'log4js'
 import { snakeCase } from 'lodash'
-import models, { configure } from 'models'
+import { connect } from 'chaos-model'
 
-import { register } from './api'
-import { swagger } from './swagger'
-import { controllers } from './controllers'
+import swagger from './swagger'
+import controllers from './controllers'
 import config from './config'
 import errors from './errors'
 import { apiKeyAuth } from './authorization'
 
-global.models = models
 global.config = config
 
 const instance = process.env.NODE_APP_INSTANCE
 
-register()
+const isDevelopment = process.env.NODE_ENV === 'development'
+const isTest = process.env.NODE_ENV === 'test'
 
 log4js.configure({
   appenders: {
@@ -35,8 +34,7 @@ const logger = log4js.getLogger()
 global.logger = logger
 
 const server = async () => {
-  const { __TEST__ } = global
-  if (!__DEV__) {
+  if (!isDevelopment) {
     logger.level = 'INFO'
   }
 
@@ -47,13 +45,8 @@ const server = async () => {
   swagger.schemes = config.swagger.schemes
 
   // create/update db version
-  try {
-    const manager = await configure(config)
-    await manager.update()
-    logger.info(`database version: ${manager.version}`)
-  } catch (err) {
-    return logger.error(err)
-  }
+  await connect(config.database)
+  logger.info('database connected')
 
   const app = express()
 
@@ -69,7 +62,7 @@ const server = async () => {
 
   const apiRouter = express.Router()
 
-  if (__DEV__ && !__TEST__) {
+  if (isDevelopment) {
     const logMiddleware = log4js.connectLogger(
       logger,
       { level: 'auto', format: ':method :url :status :response-timems' },
@@ -78,9 +71,9 @@ const server = async () => {
   }
 
   // simulate delay for development env
-  app.use((req, res, next) => {
-    setTimeout(next, 1000)
-  })
+  // app.use((req, res, next) => {
+  //   setTimeout(next, 1000)
+  // })
 
   swaggerTools.initializeMiddleware(swagger, (middleware) => {
     app.use(middleware.swaggerUi())
@@ -91,8 +84,8 @@ const server = async () => {
 
     const options = {
       controllers,
-      useStubs: __DEV__ && !__TEST__, // Conditionally turn on stubs (mock mode)
-      ignoreMissingHandlers: __DEV__ && !__TEST__,
+      useStubs: isDevelopment, // Conditionally turn on stubs (mock mode)
+      ignoreMissingHandlers: isDevelopment,
     }
 
     // Route validated requests to appropriate controller
@@ -144,7 +137,7 @@ const server = async () => {
 
   app.use('/', apiRouter)
 
-  if (__TEST__) return app
+  if (isTest) return app
 
   return app.listen(port, () => {
     logger.info(`server [${config.name}] running on port: ${port}`)

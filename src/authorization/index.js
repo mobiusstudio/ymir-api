@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { errors } from 'models'
+import { errors } from 'chaos-model'
 
 errors.register({
   ApiAuthKeyIsMissing: 401,
@@ -13,9 +13,9 @@ export const apiKeyAuth = (req, definition, apiKey, cb) => {
   }
 
   const { config } = global
-
   try {
-    const credentials = jwt.verify(apiKey, config.secret.jwt)
+    const token = apiKey.substr(7)
+    const credentials = jwt.verify(token, config.secret.jwt)
     req.trailers.credentials = credentials
     cb()
   } catch (err) {
@@ -26,4 +26,12 @@ export const apiKeyAuth = (req, definition, apiKey, cb) => {
 export const getToken = (id, role) => {
   const { config } = global
   jwt.sign({ id, role }, config.secret.jwt, config.jwtOptions)
+}
+
+
+export const getTenantId = (req) => {
+  if (req.trailers.credentials && req.trailers.credentials.tenantId) {
+    return req.trailers.credentials.tenantId
+  }
+  throw new errors.InvalidAuthKeyError()
 }

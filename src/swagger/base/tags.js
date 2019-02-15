@@ -1,4 +1,4 @@
-export const tags = []
+const tags = []
 
 export const addTag = ({ name, description = '', externalDocs = { url: '' } }) => {
   if (tags.every(item => item.name !== name)) {
@@ -9,3 +9,5 @@ export const addTag = ({ name, description = '', externalDocs = { url: '' } }) =
     })
   }
 }
+
+export default tags

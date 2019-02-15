@@ -40,7 +40,6 @@ function serve() {
     watch([
       'build/server.js',
       'build/config.json',
-      'build/node_modules/models/dist/models.js',
     ]).then((watcher) => {
       watcher.on('changed', () => {
         server = start()

@@ -1,9 +1,10 @@
 // eslint-disable-next-line no-unused-vars
+import { $ref, type } from '../constants'
 
-export const validationError = {
+const validationError = {
   description: 'error object describing the validation error, extend error',
   allOf: [{
-    $ref: '#/definitions/error',
+    $ref: $ref('error'),
   },
     // {
     //	 type: type.object,
@@ -41,3 +42,5 @@ export const validationError = {
     // },
   ],
 }
+
+export default validationError

@@ -1,42 +1,33 @@
 {
-  "name": "ymir-api",
+  "name": "api",
   "version": "0.0.1",
-  "description": "",
-  "engines": {
-    "node": "10.15.0",
-    "npm": "6.4.1"
-  },
+  "description": "api",
   "scripts": {
+    "prestart": "npm install",
     "start": "npx babel-node tools/run start",
-    "deploy": "npx babel-node tools/run deploy",
-    "build": "npx babel-node tools/run build",
-    "pipeline": "npx babel-node src/cron/product",
-    "test": "NODE_ENV=test _mocha --ui tdd --require @babel/register",
-    "test:watch": "npm run test -- --reporter min --watch"
+    "build": "npx babel-node tools/run build release"
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
-    "@babel/runtime": "^7.2.0",
+    "chaos-model": "^0.3.2",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-fileupload": "^1.1.1-alpha.1",
     "hashids": "^1.2.2",
     "is-promise": "^2.1.0",
-    "joi": "^14.3.1",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
     "log4js": "^3.0.6",
-    "swagger-tools": "^0.10.4",
-    "models": "file:../ymir-models"
+    "restify-errors": "^6.1.1",
+    "swagger-tools": "^0.10.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/node": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.2.3",
-    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/register": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "bluebird": "^3.5.3",
@@ -52,16 +43,8 @@
     "ncp": "^2.0.0",
     "nock": "^10.0.6",
     "supertest": "^3.3.0",
-    "webpack": "^4.28.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mobiusstudio/ymir-api.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mobiusstudio/ymir-api/issues"
-  },
-  "homepage": "https://github.com/mobiusstudio/ymir-api#readme"
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "ymir-cli": "^0.1.2"
+  }
 }

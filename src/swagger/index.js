@@ -1,5 +1,3 @@
-export { assemblePath } from './base/utils'
-export { addTag } from './base/tags'
-export { addPaths } from './base/paths'
-export { addDefinitions } from './base/definitions'
-export { swagger } from './base'
+import swagger from './base'
+
+export default swagger

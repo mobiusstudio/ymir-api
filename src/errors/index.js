@@ -1,4 +1,4 @@
-import { errors } from 'models'
+import { errors } from 'chaos-model'
 
 // const { locales } = require('../config')
 // eslint-disable-next-line import/no-dynamic-require

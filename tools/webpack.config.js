@@ -10,14 +10,10 @@ const GLOBALS = {
 }
 
 // 打入 babel 所需要的 runtime，生产环境不再需要安装 babel packages
-const compiledPackages = [
-  '@babel/runtime',
-]
-
 const config = {
   context: path.resolve(__dirname, '../src'),
 
-  entry: './start.js',
+  entry: ['@babel/polyfill', './start.js'],
 
   output: {
     path: path.resolve(__dirname, '../build'),
@@ -28,21 +24,7 @@ const config = {
   target: 'node',
 
   externals: [
-    function filter(context, request, cb) {
-      let isExternal = compiledPackages.indexOf(request) === -1 && request.match(/^[a-z][a-z\-0-9/.]*$/i)
-      if (!isExternal && request === './config') {
-        isExternal = true
-      }
-      if (!isExternal && request.match(/\.json$/)) {
-        const f = path.join(context, request)
-        const c = path.resolve(__dirname, '../src/config')
-        isExternal = f.indexOf(c) === 0
-      }
-      if (request.indexOf('babel') !== -1 && !!isExternal) {
-        console.log(`\x1B[31m[WARNNING]: ${request} isn't included\x1B[39m`)
-      }
-      cb(null, !!isExternal)
-    },
+    { formidable: 'commonjs formidable' },
   ],
 
   mode: MODE,
@@ -109,39 +91,4 @@ const config = {
   },
 
 }
-
-// const createCronJobConfig = (job) => {
-//   return Object.assign({}, config, {
-//     context: path.resolve(__dirname, '../src/cron'),
-//     entry: `./${job}.js`,
-//     output: {
-//       path: path.resolve(__dirname, '../build/cron'),
-//       filename: `${job}.js`,
-//       libraryTarget: 'commonjs2',
-//     },
-//     externals: [
-//       function filter(context, request, cb) {
-//         let isExternal =
-//           compiledPackages.indexOf(request) === -1 &&
-//           request.match(/^[a-z][a-z\/\.\-0-9]*$/i)
-//         if (!isExternal && request === '../config') {
-//           isExternal = true
-//         }
-//         if (!isExternal && request.match(/\.json$/)) {
-//           const f = path.join(context, request)
-//           const c = path.resolve(__dirname, '../src/config')
-//           isExternal = f.indexOf(c) === 0
-//         }
-//         if (request.indexOf('babel') !== -1 && !!isExternal) {
-//           console.log(`\x1B[31m[WARNNING]: ${request} isn't included\x1B[39m`)
-//         }
-//         cb(null, !!isExternal)
-//       },
-//     ],
-//   })
-// }
-
-export default [
-  config,
-  // createCronJobConfig('product'),
-]
+export default [config]

@@ -1,52 +1,59 @@
 import { snakeCase } from 'lodash'
-import { typeMap as T } from '../../libs/types'
 import errors from '../../errors'
 
-// const type2formats = {
-//   integer: ['int32', 'int64'],
-//   number: ['float', 'double'],
-//   string: ['byte', 'binary', 'date', 'date-time', 'password'],
-//   boolean: [],
-//   object: [],
-//   array: [],
-//   file: [],
-// }
+const type2formats = {
+  integer: ['int32', 'int64'],
+  number: ['float', 'double'],
+  string: ['byte', 'binary', 'date', 'date-time', 'password'],
+  boolean: [],
+  object: [],
+  array: [],
+  file: [],
+}
 
-// function buildName2NameMap(arr) {
-//   return arr.reduce((map, name) => {
-//     let keyName = ''
-//     const newMap = map
-//     for (let i = 0; i < name.length; i += 1) {
-//       if (name[i] === '-') {
-//         i += 1
-//         keyName += name[i].toUpperCase()
-//       } else {
-//         keyName += name[i]
-//       }
-//     }
-//     newMap[keyName] = name
-//     return newMap
-//   }, {})
-// }
+function buildName2NameMap(arr) {
+  return arr.reduce((map, name) => {
+    let keyName = ''
+    const newMap = map
+    for (let i = 0; i < name.length; i += 1) {
+      if (name[i] === '-') {
+        i += 1
+        keyName += name[i].toUpperCase()
+      } else {
+        keyName += name[i]
+      }
+    }
+    newMap[keyName] = name
+    return newMap
+  }, {})
+}
 
-// const typeList = Object.keys(type2formats)
+const typeList = Object.keys(type2formats)
 
-// export const type = buildName2NameMap(typeList)
+export const type = buildName2NameMap(typeList)
 
-// export const format = typeList.reduce((typeConstantsMap, typeName) => {
-//   const newMap = typeConstantsMap
-//   newMap[typeName] = buildName2NameMap(type2formats[typeName])
-//   return newMap
-// }, {})
+export const format = typeList.reduce((typeConstantsMap, typeName) => {
+  const newMap = typeConstantsMap
+  newMap[typeName] = buildName2NameMap(type2formats[typeName])
+  return newMap
+}, {})
 
-// export function $ref(typeName) {
-//   return `#/definitions/${typeName}`
-// }
+export function $ref(typeName) {
+  return `#/definitions/${typeName}`
+}
 
 export function code(c, lang = 'javascript') {
   return `${'```'}${lang}
 ${c}
 ${'```'}`
+}
+
+export const body = {
+  in: 'body',
+  name: 'body',
+  required: true,
+  schema: {
+  },
 }
 
 export const contentType = {
@@ -55,72 +62,90 @@ export const contentType = {
   formData: 'multipart/form-data',
 }
 
-export const pagesize = T.get('int').swg({
+export const id = {
+  required: true,
+  type: type.integer,
+  format: format.integer.int64,
+}
+
+
+export const pagesize = {
   in: 'query',
   name: 'pagesize',
   description: '分页大小',
-  req: false,
-  def: 10,
-})
+  type: type.integer,
+  format: format.integer.int32,
+  required: false,
+  default: 10,
+}
 
-export const page = T.get('int').swg({
+export const page = {
   in: 'query',
   name: 'page',
   description: '分页页数(不能同时使用page和next)',
-})
+  type: type.integer,
+  format: format.integer.int32,
+  required: false,
+}
 
-export const next = T.get('bigint').swg({
+export const next = {
   in: 'query',
   name: 'next',
   description: '分页开始id，获取此id之后的数据(不能同时使用page和next)',
-})
+  type: type.integer,
+  format: format.integer.int64,
+  required: false,
+}
 
 export const paging = {
   in: 'body',
   name: 'paging',
   description: '分页筛选/排序条件',
   schema: {
-    $ref: '#/definitions/pagingData',
+    $ref: $ref('PagingData'),
+  },
+  required: false,
+}
+
+const filter = {
+  type: type.object,
+  description: '筛选参数，{ key, symbol, value }',
+  properties: {
+    key: { type: type.string },
+    symbol: { type: type.string },
+    value: { type: [type.string, type.number] },
   },
 }
 
-const filter = T.get('object').swg({
-  description: '筛选参数，{ key, symbol, value }',
-  properties: {
-    key: T.get('string').swg(),
-    symbol: T.get('string').swg(),
-    value: {
-      type: ['string', 'number'],
-    },
-  },
-})
-
-const filters = T.get('array').swg({
+const filters = {
+  type: type.array,
   description: '筛选参数数组',
   items: filter,
-})
+}
 
-const orderByItem = T.get('object').swg({
+const orderByItem = {
+  type: type.object,
   description: '排序参数, { by, sort, ... }',
   properties: {
-    by: T.get('string').swg(),
-    sort: T.get('string').swg(),
+    by: { type: type.string },
+    sort: { type: type.string },
   },
-})
+}
 
 
-const orderBy = T.get('array').swg({
-  description: '排序参数数组',
+const orderBy = {
+  type: type.array,
   items: orderByItem,
-})
+  description: '排序参数数组',
+}
 
-export const pagingData = T.get('object').swg({
-  description: '排序参数body',
+export const PagingData = {
+  type: type.object,
   properties: {
     filters,
     orderBy,
   },
-})
+}
 
 
 // export const to = {
@@ -132,13 +157,16 @@ export const pagingData = T.get('object').swg({
 //   required: false,
 // }
 
-export const total = T.get('int').swg({
+export const total = {
   description: '列表总条目',
-})
+  type: type.integer,
+  format: format.integer.int32,
+}
 
-export const eol = T.get('boolean').swg({
+export const eol = {
   description: 'End Of List，表示是否已经到最后一条',
-})
+  type: type.boolean,
+}
 
 export const generateErrorResponses = (errorArr) => {
   const code2error = errorArr.reduce((map, ErrorConstructor) => {
@@ -162,9 +190,11 @@ ${errs.map(err => `| ${err.errorCode} | ${err.message} |\n`).join('')}
 
 `,
       schema: {
-        $ref: '#/definitions/errorResponse',
+        $ref: $ref('errorResponse'),
       },
     }
     return newMap
   }, {})
 }
+
+export default { }

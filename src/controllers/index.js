@@ -1,10 +1,21 @@
 import isPromise from 'is-promise'
+import * as task from './task'
+import * as service from './service'
+import * as gallery from './gallery'
+import * as screen from './screen'
 
-const promiseControllers = ctrs => Object.keys(ctrs)
+const controllers = {
+  ...task,
+  ...service,
+  ...gallery,
+  ...screen,
+}
+
+export default Object.keys(controllers)
   .reduce((syncControllers, operationId) => {
     const newSC = syncControllers
     newSC[operationId] = (req, res, next) => {
-      const result = ctrs[operationId](req, res, next)
+      const result = controllers[operationId](req, res, next)
       if (isPromise(result)) {
         return result.catch(next)
       }
@@ -12,13 +23,3 @@ const promiseControllers = ctrs => Object.keys(ctrs)
     }
     return newSC
   }, {})
-
-export const controllers = {}
-
-export const addControllers = (data) => {
-  const newData = promiseControllers(data)
-  Object.keys(data).forEach((key) => {
-    if (Object.keys(controllers).includes(key)) throw new Error(`Duplicate controller name: ${key}`)
-    else controllers[key] = newData[key]
-  })
-}

@@ -1,10 +1,13 @@
-import { typeMap as T } from '../../../libs/types'
+import { $ref, type } from '../constants'
 
-export const errorResponse = T.get('object').swg({
+const errorResponse = {
+  type: type.object,
   required: ['error'],
   properties: {
     error: {
-      $ref: '#/definitions/error',
+      $ref: $ref('error'),
     },
   },
-})
+}
+
+export default errorResponse

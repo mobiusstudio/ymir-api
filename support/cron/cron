@@ -1,2 +1,0 @@
-# m h dom mon dow user command
-* 5 * * * /usr/local/bin/node ~/Documents/source/bip/bip-api/build/cron/product.js
