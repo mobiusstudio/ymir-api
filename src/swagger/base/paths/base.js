@@ -1,6 +1,18 @@
 import { upperFirst } from 'lodash'
 import { contentType, pagesize, page, next, paging } from '../constants'
 
+class DataContent {
+  constructor(operation, schemaName) {
+    this.in = 'body'
+    this.name = 'data'
+    this.description = `${operation} ${schemaName} data`
+    this.required = true
+    this.schema = {
+      $ref: `#/definitions/${operation}${upperFirst(schemaName)}Request`,
+    }
+  }
+}
+
 export class BaseRoutes {
   constructor(schemaName) {
     const id = {
@@ -12,25 +24,15 @@ export class BaseRoutes {
       required: true,
     }
 
-    const addContent = {
-      in: 'body',
-      name: 'data',
-      description: `create ${schemaName} data`,
-      required: true,
-      schema: {
-        $ref: `#/definitions/add${upperFirst(schemaName)}Request`,
-      },
-    }
+    const addContent = new DataContent('add', schemaName)
 
-    const updateContent = {
-      in: 'body',
-      name: 'data',
-      description: `create ${schemaName} data`,
-      required: true,
-      schema: {
-        $ref: `#/definitions/update${upperFirst(schemaName)}Request`,
-      },
-    }
+    const batchAddContent = new DataContent('batchAdd', schemaName)
+
+    const updateContent = new DataContent('update', schemaName)
+
+    const batchUpdateContent = new DataContent('batchUpdate', schemaName)
+
+    const batchDeleteContent = new DataContent('batchDelete', schemaName)
 
     const generalDescription = {
       tags: [upperFirst(schemaName)],
@@ -55,6 +57,27 @@ export class BaseRoutes {
         summary: `Add new ${schemaName}`,
         ...generalDescription,
         parameters: [addContent],
+      },
+    }
+    // eslint-disable-next-line dot-notation
+    this['batch'] = {
+      post: {
+        operationId: `batchAdd${upperFirst(schemaName)}`,
+        summary: `Batch add new ${schemaName}`,
+        ...generalDescription,
+        parameters: [batchAddContent],
+      },
+      patch: {
+        operationId: `batchUpdate${upperFirst(schemaName)}`,
+        summary: `Batch update new ${schemaName}`,
+        ...generalDescription,
+        parameters: [batchUpdateContent],
+      },
+      delete: {
+        operationId: `batchDelete${upperFirst(schemaName)}`,
+        summary: `Batch delete new ${schemaName}`,
+        ...generalDescription,
+        parameters: [batchDeleteContent],
       },
     }
     this['{id}'] = {
