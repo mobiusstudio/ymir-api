@@ -1,28 +1,30 @@
+import { upperFirst } from 'lodash'
+
 export class BaseDefinitions {
-  constructor(schemaName, body) {
-    this.addTaskRequest = {
+  constructor(schemaName, requestBody) {
+    this[`add${upperFirst(schemaName)}Request`] = {
       description: `create ${schemaName} request`,
-      properties: body,
+      properties: requestBody,
     }
 
-    this.batchAddTaskRequest = {
+    this[`batchAdd${upperFirst(schemaName)}Request`] = {
       description: 'batch add request',
       type: 'array',
-      items: this.addTaskRequest,
+      items: this[`add${upperFirst(schemaName)}Request`],
     }
 
-    this.updateTaskRequest = {
+    this[`update${upperFirst(schemaName)}Request`] = {
       description: `update ${schemaName} request`,
-      properties: body,
+      properties: requestBody,
     }
 
-    this.batchUpdateTaskRequest = {
+    this[`batchUpdate${upperFirst(schemaName)}Request`] = {
       description: 'batch update request',
       type: 'array',
       items: {
         type: 'object',
         properties: {
-          data: this.updateTaskRequest,
+          data: this[`update${upperFirst(schemaName)}Request`],
           pkeyValue: {
             description: 'id',
             type: 'integer',
@@ -32,7 +34,7 @@ export class BaseDefinitions {
       },
     }
 
-    this.batchDeleteTaskRequest = {
+    this[`batchDelete${upperFirst(schemaName)}Request`] = {
       description: 'batch delete request',
       type: 'array',
       items: {

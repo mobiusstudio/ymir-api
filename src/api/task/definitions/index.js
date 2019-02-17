@@ -1,7 +1,7 @@
 import { BaseDefinitions } from '../../../swagger'
 import { isCompleted, title, content, deadline } from './properties'
 
-const body = {
+const requestBody = {
   isCompleted,
   title,
   content,
@@ -10,7 +10,7 @@ const body = {
 
 class TaskDefinitions extends BaseDefinitions {
   constructor() {
-    super('task', body)
+    super('task', requestBody)
   }
 }
 
